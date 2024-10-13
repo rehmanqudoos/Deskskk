@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Sharing Example</title>
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screen Sharing Example</h1>
+    <button id="startButton">Share Screen</button>
+    <video id="screenVideo" autoplay></video>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', async () => {
+            try {
+                // Request permission to share the screen
+                const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                
+                // Set the video element to display the shared screen
+                document.getElementById('screenVideo').srcObject = stream;
+            } catch (err) {
+                console.error("Error: " + err);
+                alert("Could not share the screen: " + err.message);
+            }
+        });
+    </script>
+</body>
+</html>
